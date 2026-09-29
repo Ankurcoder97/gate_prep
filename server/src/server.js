@@ -110,16 +110,21 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/branches', branchRoutes);
-app.use('/api/subjects', subjectRoutes);
-app.use('/api/topics', topicRoutes);
-app.use('/api/questions', questionRoutes);
-app.use('/api/tests', testRoutes);
-app.use('/api/papers', paperRoutes);
-app.use('/api/analytics', analyticsRoutes);
-app.use('/api/admin', adminRoutes);
+// API Routes (Mounted on both /api/... and direct path for seamless client compatibility)
+const mountRoutes = (prefix = '') => {
+  app.use(`${prefix}/auth`, authRoutes);
+  app.use(`${prefix}/branches`, branchRoutes);
+  app.use(`${prefix}/subjects`, subjectRoutes);
+  app.use(`${prefix}/topics`, topicRoutes);
+  app.use(`${prefix}/questions`, questionRoutes);
+  app.use(`${prefix}/tests`, testRoutes);
+  app.use(`${prefix}/papers`, paperRoutes);
+  app.use(`${prefix}/analytics`, analyticsRoutes);
+  app.use(`${prefix}/admin`, adminRoutes);
+};
+
+mountRoutes('/api');
+mountRoutes('');
 
 // Error Handling Middlewares
 app.use(notFound);
