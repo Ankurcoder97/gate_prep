@@ -1,0 +1,82 @@
+# ==============================================================================
+# SECRETS & ENVIRONMENT VARIABLES (CRITICAL - NEVER COMMIT TO GITHUB)
+# ==============================================================================
+.env
+.env.*
+!.env.example
+*.env
+*.env.local
+*.env.development
+*.env.test
+*.env.production
+
+# ==============================================================================
+# DEPENDENCIES
+# ==============================================================================
+node_modules/
+*/node_modules/
+.pnp
+.pnp.js
+
+# ==============================================================================
+# BUILD OUTPUTS & BUNDLES
+# ==============================================================================
+dist/
+*/dist/
+build/
+*/build/
+out/
+.vite/
+*/.vite/
+
+# ==============================================================================
+# LOGS & SYSTEM RUNTIMES
+# ==============================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==============================================================================
+# USER UPLOADED FILES & DATA STORAGE
+# ==============================================================================
+server/uploads/*
+!server/uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
+.mongodb-memory-server/
+*/.mongodb-memory-server/
+dump/
+
+# ==============================================================================
+# OS & EDITOR METADATA
+# ==============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Tt]humbs.db
+
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==============================================================================
+# TEMPORARY & TEST CACHES
+# ==============================================================================
+.cache/
+.parcel-cache/
+.eslintcache
+coverage/
+.nyc_output/
+.turbo

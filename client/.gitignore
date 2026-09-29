@@ -1,0 +1,17 @@
+# Secrets & Environment variables
+.env
+.env.*
+!.env.example
+*.env
+
+# Dependencies
+node_modules/
+
+# Production build output
+dist/
+build/
+.vite/
+
+# Logs
+*.log
+npm-debug.log*

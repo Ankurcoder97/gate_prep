@@ -1,0 +1,19 @@
+# Secrets & Environment variables
+.env
+.env.*
+!.env.example
+*.env
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Uploaded PDFs & Temp files
+uploads/*
+!uploads/.gitkeep
+
+# MongoDB Memory Server cache
+.mongodb-memory-server/
