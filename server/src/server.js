@@ -84,6 +84,22 @@ app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 // Static uploads serving
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
+// Root Welcome & Health Check Routes
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    status: 'online',
+    platform: 'GATE Real-Time Assessment Platform API',
+    version: '1.0.0',
+    documentation: '/api/health',
+    timestamp: new Date().toISOString(),
+  });
+});
+
+app.head('/', (req, res) => {
+  res.status(200).end();
+});
+
 // Health Check API
 app.get('/api/health', (req, res) => {
   res.json({
