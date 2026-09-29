@@ -27,8 +27,8 @@ export class TestEngineService {
     let targetSubjectIds = [...selectedSubjectIds];
     let targetTopicIds = [...selectedTopicIds];
 
-    if (testType === 'FULL_LENGTH') {
-      // For Full Length GATE test, fetch all active subjects and topics for this branch
+    if (testType === 'FULL_LENGTH' || requestedMarks >= 100) {
+      // For Full Length 100-mark GATE test, fetch all active subjects and topics for this branch
       const allSubjects = await Subject.find({ branchId, isActive: true }).select('_id');
       const allTopics = await Topic.find({ branchId, isActive: true }).select('_id');
       targetSubjectIds = allSubjects.map((s) => s._id.toString());
@@ -47,7 +47,7 @@ export class TestEngineService {
       targetSubjectIds = [...new Set(topics.map((t) => t.subjectId.toString()))];
     }
 
-    if (targetTopicIds.length === 0 && testType !== 'FULL_LENGTH') {
+    if (targetTopicIds.length === 0 && testType !== 'FULL_LENGTH' && requestedMarks < 100) {
       throw {
         statusCode: 400,
         code: 'NO_TOPICS_SELECTED',
@@ -128,7 +128,7 @@ export class TestEngineService {
     // Prioritize unseen questions first, and automatically fill any remaining marks with least-seen questions from selected topics
     let selectedQuestions = [];
 
-    if (testType === 'FULL_LENGTH') {
+    if (testType === 'FULL_LENGTH' || requestedMarks >= 100) {
       selectedQuestions = await this.selectFullLengthQuestions(
         branchId,
         unseenPool,

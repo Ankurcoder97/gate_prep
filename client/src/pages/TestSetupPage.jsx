@@ -26,7 +26,7 @@ export const TestSetupPage = () => {
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const initialType = searchParams.get('type') || 'TOPIC';
+  const initialType = searchParams.get('type') || 'FULL_LENGTH';
 
   const [branches, setBranches] = useState([]);
   const [selectedBranchId, setSelectedBranchId] = useState('');
@@ -77,8 +77,8 @@ export const TestSetupPage = () => {
         });
         setExpandedSubjects(initialExpanded);
 
-        // Pre-select first subject & topics for instant convenience
-        if (testType === 'FULL_LENGTH') {
+        // Pre-select all subjects for full 100-mark mock test
+        if (testType === 'FULL_LENGTH' || requestedMarks >= 100) {
           handleSelectAll(res.data.subjects);
         } else if (res.data.subjects.length > 0) {
           const firstSub = res.data.subjects[0];
@@ -467,6 +467,10 @@ export const TestSetupPage = () => {
                     onClick={() => {
                       setRequestedMarks(m);
                       setDurationMinutes(m === 100 ? 180 : m === 50 ? 90 : 45);
+                      if (m === 100) {
+                        setTestType('FULL_LENGTH');
+                        handleSelectAll();
+                      }
                     }}
                     className={`py-2 rounded-xl text-xs font-bold transition-all ${
                       requestedMarks === m
@@ -479,6 +483,15 @@ export const TestSetupPage = () => {
                 ))}
               </div>
             </div>
+
+            {testType === 'FULL_LENGTH' && (
+              <div className="p-3 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-xs text-indigo-700 dark:text-indigo-300 font-medium flex items-start space-x-2">
+                <Zap className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                <span>
+                  <strong>Full 100-Mark Assessment:</strong> 65 Questions • 100 Marks (15 GA + 85 Core) across all branch subjects • 180 Mins.
+                </span>
+              </div>
+            )}
 
             {/* Duration */}
             <div>
