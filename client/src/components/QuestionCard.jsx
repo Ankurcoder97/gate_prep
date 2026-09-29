@@ -81,6 +81,11 @@ export const QuestionCard = () => {
               {currentQ.topicId.name}
             </span>
           )}
+          {currentQ.paper && (
+            <span className="text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+              {currentQ.paper} {currentQ.sourceQuestionNumber ? `• Q.${currentQ.sourceQuestionNumber}` : ''}
+            </span>
+          )}
           {currentQ.isRepeatedFallback && (
             <span className="text-[10px] px-2 py-0.5 rounded font-medium bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
               Revision Practice

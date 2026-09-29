@@ -37,6 +37,11 @@ export const QuestionPaperModal = ({ isOpen, onClose }) => {
                     {q.questionType} ({q.marks} Mark{q.marks > 1 ? 's' : ''})
                   </span>
                   <span className="text-xs text-slate-500">{q.subjectId?.name}</span>
+                  {q.paper && (
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 font-bold">
+                      {q.paper}
+                    </span>
+                  )}
                 </div>
                 <button
                   onClick={() => {

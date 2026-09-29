@@ -111,7 +111,7 @@ export class PdfParserService {
           sourcePdf: paper.originalFileName,
           sourceQuestionNumber: item.questionNumber || (i + 1),
           tags: [`GATE-${paper.year}`, paper.session, item.questionType],
-          verified: false, // Ingested questions queue for admin review & verification
+          verified: true, // Questions from uploaded official GATE papers are immediately active for tests
           hash,
           normalizedText,
           sourceType: 'GATE_PYQ',
