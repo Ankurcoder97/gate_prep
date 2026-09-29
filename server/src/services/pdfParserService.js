@@ -81,11 +81,17 @@ export class PdfParserService {
           continue; // Skip or mark duplicate
         }
 
-        // Classification
+        // Classification with metadata hints if available
         const classification = await ClassificationService.classifyQuestion(
           item.questionText,
           paper.branchId,
-          item.options
+          item.options,
+          {
+            subjectName: item.subjectName,
+            topicName: item.topicName,
+            subtopic: item.subtopic,
+            difficulty: item.difficulty,
+          }
         );
 
         const hash = DeduplicationService.generateHash(item.questionText);

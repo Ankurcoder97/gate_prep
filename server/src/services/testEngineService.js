@@ -69,6 +69,7 @@ export class TestEngineService {
     const query = {
       branchId,
       verified: true, // Only production-verified questions
+      sourceType: 'GATE_PYQ', // Exclusively from uploaded authentic GATE PYQ papers
     };
 
     if (testType === 'TOPIC') {
